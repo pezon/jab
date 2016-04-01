@@ -43,7 +43,7 @@ status:
 	docker-compose ps;
 
 logs:
-	docker-compose logs $(NAME);
+	docker-compose logs $(IMAGE_NAME);
 
 # Entrypoints
 #

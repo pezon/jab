@@ -9,18 +9,18 @@ set -e
 
 primed=/home/jab/.primed;
 
-if [ -f primed ]; then
-    exec "$@";
+if [ ! -f primed ]; then
+	# Configure container
+	sh /usr/local/bin/configure.sh;
+
+	# Configuration complete. Invoke the install.
+	npm install .
+
+	# A rebuild is required to make sure our sass dependencies are appropriate for
+	# our Docker container's architecture.
+	npm rebuild node-sass
+
+	touch primed;
 fi
-
-# Configure container
-sh /usr/local/bin/configure.sh;
-
-# Configuration complete. Invoke the install.
-npm install .
-
-# A rebuild is required to make sure our sass dependencies are appropriate for
-# our Docker container's architecture.
-npm rebuild node-sass
 
 exec "$@";

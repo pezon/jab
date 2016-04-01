@@ -6,7 +6,7 @@ hyperdrive-local:
         - ".:/code"
 
 hyperdrive-remote:
-    image: "quay.io/decipher/jab:latest"
+    image: "quay.io/organization/jab:latest"
     env_file: 
         - ./resources/jab.env
     user: jab
