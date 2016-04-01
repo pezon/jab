@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+# get installation directory
+# resolve $SOURCE until the file is no longer a symlink
+# source: http://stackoverflow.com/posts/246128
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do 
+	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )";
+	SOURCE="$(readlink "$SOURCE")";
+
+	# if $SOURCE was a relative symlink, we need to resolve it
+	# relative to the path where the symlink file was located
+	[[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE";
+done;
+INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )";
+
+# run jab
+docker run \
+	--env-file=$INSTALL_DIR/jab.env \
+	-v $(pwd):/code \
+	-p 9000 \
+	-p 3000 \
+	-p 3001 \
+	jab $*;

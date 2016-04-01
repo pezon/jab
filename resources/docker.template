@@ -1,0 +1,8 @@
+# Environment vars file for Makefile.
+
+MACHINE_NAME=dev
+SERVICE_NAME=jab
+IMAGE_TAG=devel
+
+DOCKER_HOST=quay.io
+DOCKER_ORG=

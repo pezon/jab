@@ -1,0 +1,15 @@
+hyperdrive-local:
+    image: "jab"
+    user: jab
+    tty: true
+    volumes:
+        - ".:/code"
+
+hyperdrive-remote:
+    image: "quay.io/decipher/jab:latest"
+    env_file: 
+        - ./resources/jab.env
+    user: jab
+    tty: true
+    volumes:
+        - ".:/code"
